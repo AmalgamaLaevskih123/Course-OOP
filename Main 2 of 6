@@ -1,0 +1,126 @@
+package com.company;
+import java.util.LinkedList;
+import java.lang.String;
+
+//import java.util.Scannner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // write your code here
+        System.out.println("1. "+task11());
+        System.out.println("2. "+task12());
+        System.out.println("3. "+task13());
+        System.out.println("4. "+task14());
+        System.out.println("5. "+task15());
+        System.out.println("6. "+task16());
+        System.out.println("7. "+task17());
+        System.out.println("8. "+task18());
+        System.out.println("9 one."+isPrefix());
+        System.out.println("9 two "+isSufix());
+        System.out.println("10. "+task20());
+
+    }
+
+    public static LinkedList<String> task11() {
+        String start = "nice";
+        int num = 5;
+        char[] midle = start.toCharArray();
+        LinkedList<String> ListEnd = new LinkedList<String>();
+        for (int i = 0; i < midle.length; i++) {
+            for (int l = 0; l <= num; l++) {
+                ListEnd.add(Character.toString(midle[i]));
+            }
+        }
+        return ListEnd;
+    }
+
+    public static int task12() {
+        int[] massive = {16, 20, 67, 4, 100, 9, 56, 250, 2};
+        int mx = massive[0];
+        int mn = massive[0];
+        for (int i = 0; i < massive.length; i++) {
+            if (massive[i] > mx) {
+                mx = massive[i];
+            } else mn = massive[i];
+        }
+        return mx - mn;
+    }
+
+    public static boolean task13() {
+        int[] massive = {20, 2};
+        int sum = 0;
+        for (int i = 0; i < massive.length; i++) {
+            sum = sum + massive[i];
+        }
+        if (sum % massive.length != 0) {
+            return false;
+        } else
+            return true;
+    }
+
+
+    public static int[] task14() {
+        int[] masssive = {1,3,5,7};
+        int sum = 0;
+        for (int i = 0; i < masssive.length; i++) {
+            sum += masssive[i];
+            masssive[i] = sum;
+        }
+        return masssive;
+    }
+
+    public static int task15() {
+        String number = "43.206789";
+        int polozhenie = number.indexOf('.') + 1;
+        return (number.length() - polozhenie);
+    }
+
+    public static int task16() {
+        int needednumber = 8;
+        return (int) ((Math.pow(((1 + Math.sqrt(5)) / 2), needednumber) - Math.pow(((1 - Math.sqrt(5)) / 2), needednumber)) / Math.sqrt(5));
+    }
+
+    public static boolean task17() {
+        String index = "44444";
+        int t=-1;
+        try { Integer pr1 = new Integer(index);
+            if (index.length() == 5)
+                 t=1;
+        } catch (NumberFormatException e) {
+             t=0; }
+
+        if (t==1)
+            return true;
+        else return false;
+    }
+
+    public static boolean task18() {
+        String One ="ratio";
+        String Two="orator";
+        if ((One.charAt(0)==Two.length()-1) & (One.length()-1==Two.charAt(0)))
+            return true;
+        else
+            return false;
+    }
+
+     public static boolean isPrefix() {
+         String text="automation";
+         String prefix="auto";
+         return text.startsWith(prefix);
+     }
+
+     public static boolean isSufix() {
+        String text="arachnophobia";
+        String sufix="phobia";
+        return text.endsWith(sufix);
+
+     }
+    public static int task20() {
+        int step=1;
+        int count = ((Integer) (step / 2)) * 2 + (step % 2 * 3);
+        return count;
+    }
+
+}
+
