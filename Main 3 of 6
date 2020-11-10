@@ -1,0 +1,195 @@
+package com.company;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.lang.String;
+
+//import java.util.Scannner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // write your code here
+        System.out.println("1. " + task21());
+        System.out.println("2. " + task22());
+        System.out.println("3. " + task23());
+        System.out.print(task24());
+        System.out.println("5 " + task25());
+        System.out.println("6 " + task26());
+        System.out.println("7 " + task27());
+        System.out.println("8 " + task28());
+        System.out.println("9. " + task29());
+        System.out.println("10. " + task30());
+    }
+
+    public static String task21() {
+        int a=1;
+        int b=0;
+        int c=-1;
+        int D=b*b-4*a*c;
+        if(D>0){
+            double x1=(-b+Math.sqrt(D))/2*a;
+            double x2=(-b-Math.sqrt(D))/2*a;
+             return ("Уравнение имеет два корня:"+x1+", "+x2);
+        }
+        else if(D==0){
+            double x3=-b/(2*a);
+            return ("Уравнение имеет один корень:"+x3);
+        }
+        else return ("Уравнение не имеет действительных корней");
+    }
+
+    public static int task22() {
+     String str="Klepa pu zip mu Klepa pu zip mu ka ";
+     int n=2;
+     String substr = "zip";
+     int pos = str.indexOf(substr);
+     while (--n > 0 && pos != -1)
+         pos = str.indexOf(substr, pos + 1);
+     return pos+1;
+    }
+
+    public static boolean task23() { // ДОРАБОТАТЬ НАДО
+        int number=496;
+        int var1=0;
+        int var2=1;
+        for (int i=1; i<number;i++){
+            if(number%i==0)
+                var1+=i;
+        }
+        if (var1==number)
+            return  (true);
+        else
+            return (false);
+    }
+
+    public static String task24() {
+        String str="Cats dogs and mouse.";
+        char[] temple = str.toCharArray();
+        if (temple.length>2) {
+            if (temple[0] == temple[temple.length - 1]) {
+                return ("4. Two's a pair");
+            }
+            else {
+                char t = temple[0];
+                temple[0] = temple[temple.length - 1];
+                temple[temple.length - 1] = t;
+                System.out.print("4. ");
+                System.out.println(temple);
+                return ("");
+            }
+        }
+        else
+            return ("4. Incompatible");
+    }
+
+    public static boolean task25() {
+    String str="#6AaD5f";
+    int number=0;
+    char [] mass= str.toCharArray();
+    if ((mass[0]=='#') && ( str.length()==7)){
+        for(int i=1;i<=str.length()-1;i++){
+           if(mass[i]=='0' || mass[i]=='1' || mass[i]=='2' || mass[i]=='3' || mass[i]=='4'|| mass[i]=='5'|| mass[i]=='6'|| mass[i]=='7'|| mass[i]=='8' || mass[i]=='9'|| mass[i]=='A' || mass[i]=='B'|| mass[i]=='C' ||mass[i]=='D' || mass[i]=='F' || mass[i]=='a'||mass[i]=='c'||mass[i]=='b'||mass[i]=='d'||mass[i]=='f'){
+            number+=1;
+            }
+        }
+    }
+    if (number==6)
+        return true;
+    else
+        return false;
+    }
+    
+    public static boolean task26(){
+        int[] mass1={1,2,3,5,5,5};
+        int[] mass2={1,1,1,5,6,7,8,9};
+        int uniclo1=0;
+        int uniclo2=0;
+        int temp=-1;
+        for( int i=0;i< mass1.length;i++){
+            if (temp!=mass1[i]){
+                uniclo1+=1;
+                temp=mass1[i];
+        }}
+        for( int i=0;i< mass2.length;i++){
+            if (temp!=mass2[i]){
+                uniclo2+=1;
+                temp=mass2[i];
+            }}
+        if(uniclo1==uniclo2)
+            return true;
+        else return false;
+    }
+
+    public static boolean task27(){
+
+        int n=297;
+        String chislo=Integer.toString(n*n);
+        char[] str=chislo.toCharArray();
+        String sub= chislo.substring(0, chislo.length()/2);
+        String sub2= chislo.substring(chislo.length()/2, chislo.length());
+        System.out.println(sub);
+        System.out.println(sub2);
+        int left= Integer.parseInt(sub);
+        int rigth= Integer.parseInt(sub2);
+        if  (left+rigth==n)
+            return true;
+        else
+            return false;
+
+    }
+
+    public static String task28(){
+        String str="01100001011000000000011101001101001";
+        String str1="";
+        int temple=0;
+        int max=-1;
+        char[] mass=str.toCharArray();
+        for(int i=0;i< mass.length;i++){
+            if(mass[i]=='0'){
+                temple+=1;
+                if(temple>max)
+                    max=temple;
+            }
+            else temple=0;
+        }
+        StringBuilder b = new StringBuilder(str1);
+        for(int i = 0; i<max; i++){
+            b.append("0");
+            }
+            return b.toString();
+        }
+
+    public static int task29() {
+        int number = 200;
+        while (true) {
+            boolean is_Prime = true;
+            for (int i = 2; i <= Math.sqrt(number); i++) {
+                if (number % i == 0) {
+                    is_Prime = false;
+                    break;
+                }
+            }
+            if (!is_Prime) {
+                number++;
+            }
+            else {
+                return number;
+            }
+
+        }
+
+    }
+
+
+    public static boolean task30(){
+        int a=3;
+        int b=2;
+        int c=5;
+        if ((a<=b+c)&&(b<=a+c)&&(c<=a+b))
+            return true;
+        else return false;
+    }
+
+}
+
+
