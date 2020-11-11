@@ -1,0 +1,231 @@
+package com.company;
+import java.util.HashSet;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Objects;
+
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        System.out.println("1: " + task41());
+        System.out.println("2: " + task42());
+        System.out.println("3: " + task43());
+        System.out.println("4: " + task44());
+        System.out.println("5: " + task45());
+        System.out.println("6: " + task46());
+        System.out.println("7: " + task47());
+        System.out.println("8: " + task48());
+        System.out.println("9: " + task49());
+       System.out.println("10: " + task410());
+
+    }
+
+    public static String task41() {
+        int maxLet = 10;
+        int count = 0;
+        String inputString = "hello my name is bessie and this my essay";
+        String[] stringArray = inputString.split(" ");
+        StringBuilder res = new StringBuilder();
+        for (String element:stringArray){
+
+            if (element.length() + count <= maxLet && count != 0){
+                res.append(" ").append(element);
+                count += element.length();
+            }
+            else if (element.length() + count <= maxLet && count == 0){
+                res.append(element);
+                count += element.length();
+            }
+            else if (element.length() + count > maxLet && count != 0){
+                res.append("\n").append(element);
+                count = element.length();
+            }
+            else if (element.length() + count > maxLet && count == 0){
+                res.append(element).append("\n");
+            }
+        }
+        return res.toString();
+    }
+
+    public static ArrayList<String> task42() {
+
+        String inputString = "()()()()(())";
+        char[] charArray = inputString.toCharArray();
+        int openCounter = 0;
+        int closeCounter = 0;
+        int lastIndex = 0;
+        ArrayList<String> finalArray = new ArrayList<>();
+        for (int counter = 0; counter < inputString.length(); counter++) {
+            if (charArray[counter] == '(') {
+                openCounter++;
+            }
+            if (charArray[counter] == ')') {
+                closeCounter++;
+            }
+            if (openCounter == closeCounter) {
+                finalArray.add(inputString.substring(lastIndex, counter + 1));
+                lastIndex = counter + 1;
+                closeCounter = 0;
+                openCounter = 0;
+            }
+        }
+        return finalArray;
+    }
+
+    public static String task43() {
+        String inputString = "hello_edabit";
+        StringBuilder res1 = new StringBuilder();
+        StringBuilder res2 = new StringBuilder();
+        String[] inputStringArray = inputString.split(" ");
+        for (String s : inputStringArray) {
+
+            res1.append(s.substring(0, 1).toUpperCase()).
+                    append(s.substring(1).toLowerCase());
+            res2.append(s.toLowerCase()).append("_");
+
+        }
+        String[] outputArray = new String[]{res1.toString(), res2.substring(0, res2.length() - 1)};
+        return String.join("\n", outputArray);
+    }
+
+    public static String task44() {
+
+        String data = "9 17 30 1.5";
+        float[] dataArray = new float[4];
+        for (int counter = 0; counter < 4; counter++){
+            dataArray[counter] = Float.parseFloat(data.split(" ")[counter]);
+        }
+        String res;
+        if (dataArray[1] <= 17) {
+            res = "$" + ((dataArray[1] - dataArray[0]) * dataArray[2]);
+        } else {
+            if (dataArray[0] < 17) {
+                res = "$" + ((17 - dataArray[0]) * dataArray[2] + (dataArray[1] - 17) * dataArray[3] * dataArray[2]);
+            } else {
+                res = "$" + ((dataArray[1] - dataArray[0]) * dataArray[3] * dataArray[2]);
+            }
+        }
+        return res;
+    }
+
+    public static String task45() {
+
+        String res;
+        String weight = "205 pounds";
+        String height = "73 inches";
+        String[] heightArray = height.split(" ");
+        String[] weightArray = weight.split(" ");
+        float weightFinal;
+        float heightFinal;
+        if (Objects.equals(weightArray[1], "pounds")) {
+            weightFinal = new Float(weightArray[0]);
+            weightFinal = (float) (weightFinal / 2.2);
+        } else {
+            weightFinal = new Float(weightArray[0]);
+        }
+        if (Objects.equals(heightArray[1], "inches")) {
+            heightFinal = new Float(heightArray[0]);
+            heightFinal = (float) (heightFinal / 39.4);
+        } else {
+            heightFinal = new Float(heightArray[0]);
+        }
+        float BMI = (float) (weightFinal / Math.pow(heightFinal, 2));
+        if (BMI < 18.5) {
+            res = new DecimalFormat("#0.0").format(BMI) + " - Недостаточный вес";
+        } else if (BMI > 25) {
+            res = new DecimalFormat("#0.0").format(BMI) + " - Избыточный вес";
+        } else {
+            res = new DecimalFormat("#0.0").format(BMI) + " - Вес в пределах нормы";
+        }
+        return res;
+    }
+
+    public static int task46(){
+
+        int inputNum = 999;
+        int timesCount = 0;
+        while (inputNum > 9){
+            timesCount++;
+            String fromNum = String.valueOf(inputNum);
+            inputNum = 1;
+            for (int count = 0; count < fromNum.length(); count++){
+                inputNum *= Character.getNumericValue(fromNum.charAt(count));
+            }
+        }
+        return timesCount;
+    }
+
+    public static String task47() {
+
+        String inputString = "abbccc";
+        StringBuilder res = new StringBuilder();
+        char[] charArray = inputString.toCharArray();
+        int symbolCount = 1;
+        for (int counter = 1; counter < inputString.length(); counter++) {
+            if (charArray[counter - 1] == charArray[counter]) {
+                symbolCount += 1;
+            } else if (symbolCount > 1) {
+                res.append(charArray[counter - 1]).append("*").append(symbolCount);
+                symbolCount = 1;
+            } else {
+                res.append(charArray[counter - 1]);
+                symbolCount = 1;
+            }
+            if (counter == inputString.length() - 1 & symbolCount > 1) {
+                res.append(charArray[counter - 1]).append("*").append(symbolCount);
+            } else if (counter == inputString.length() - 1 & symbolCount == 1) {
+                res.append(charArray[counter]);
+            }
+        }
+        return res.toString();
+    }
+
+    public static boolean task48(){
+
+        String inputString1 = "Sam i am!";
+        String inputString2 = "Green eggs and HAM";
+        return inputString1.split(" ")[inputString1.split(" ").length - 1].replaceAll("[BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxZz]", "").
+                equals(inputString2.split(" ")[inputString2.split(" ").length - 1].replaceAll("[BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxZz]", ""));
+    }
+
+    public static boolean task49() {
+
+        String inputNumber1 = "451999277";
+        String inputNumber2 = "41177722899";
+        boolean res = false;
+        if ((inputNumber1.matches("[0-9&&[^0]]*0{3}[0-9&&[^0]]*") && inputNumber2.matches("[0-9&&[^0]]*0{2}[0-9&&[^0]]*")) ||
+                (inputNumber1.matches("[0-9&&[^1]]*1{3}[0-9&&[^1]]*") && inputNumber2.matches("[0-9&&[^1]]*1{2}[0-9&&[^1]]*")) ||
+                (inputNumber1.matches("[0-9&&[^2]]*2{3}[0-9&&[^2]]*") && inputNumber2.matches("[0-9&&[^2]]*2{2}[0-9&&[^2]]*")) ||
+                (inputNumber1.matches("[0-9&&[^3]]*3{3}[0-9&&[^3]]*") && inputNumber2.matches("[0-9&&[^3]]*3{2}[0-9&&[^3]]*")) ||
+                (inputNumber1.matches("[0-9&&[^4]]*4{3}[0-9&&[^4]]*") && inputNumber2.matches("[0-9&&[^4]]*4{2}[0-9&&[^4]]*")) ||
+                (inputNumber1.matches("[0-9&&[^5]]*5{3}[0-9&&[^5]]*") && inputNumber2.matches("[0-9&&[^5]]*5{2}[0-9&&[^5]]*")) ||
+                (inputNumber1.matches("[0-9&&[^6]]*6{3}[0-9&&[^6]]*") && inputNumber2.matches("[0-9&&[^6]]*6{2}[0-9&&[^6]]*")) ||
+                (inputNumber1.matches("[0-9&&[^7]]*7{3}[0-9&&[^7]]*") && inputNumber2.matches("[0-9&&[^7]]*7{2}[0-9&&[^7]]*")) ||
+                (inputNumber1.matches("[0-9&&[^8]]*8{3}[0-9&&[^8]]*") && inputNumber2.matches("[0-9&&[^8]]*8{2}[0-9&&[^8]]*")) ||
+                (inputNumber1.matches("[0-9&&[^9]]*9{3}[0-9&&[^9]]*") && inputNumber2.matches("[0-9&&[^9]]*9{2}[0-9&&[^9]]*"))) {
+            res = true;
+        }
+        return res;
+    }
+
+    public static int task410() {
+
+        String inputString = "AZYSDVAUUSAUUAUAUA";
+        String bookmark = "A";
+        String[] books = inputString.split(bookmark); //Разбиение строки по символу-границе в массив строк
+        HashSet<Character> uniqueBooks = new HashSet<>();
+        for (int counter = 1; counter < books.length; counter++) {
+            if (counter % 2 != 0) {
+                if (!books[counter].isBlank()) {
+                    char[] charArray = books[counter].toCharArray();
+                    for (char letter : charArray) {
+                        uniqueBooks.add(letter);
+                    }
+                }
+            }
+        }
+        return uniqueBooks.size();
+    }
+}
